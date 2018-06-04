@@ -1,0 +1,6 @@
+bin/
+intermediates/
+lib/
+*bin/
+.idea/
+.vs/

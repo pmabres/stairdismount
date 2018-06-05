@@ -1,5 +1,6 @@
 file (MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/intermediates/SFML")
 file (MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/intermediates/bullet3")
+file (MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/intermediates/glm")
 
 execute_process(COMMAND "${CMAKE_COMMAND}"
         -G ${CMAKE_GENERATOR}
@@ -25,4 +26,14 @@ execute_process(COMMAND "${CMAKE_COMMAND}"
         )
 execute_process(COMMAND "${CMAKE_COMMAND}"
         --build ${CMAKE_SOURCE_DIR}/intermediates/SFML
+        --config ${CMAKE_BUILD_TYPE} --target install)
+
+execute_process(COMMAND "${CMAKE_COMMAND}"
+        -G ${CMAKE_GENERATOR}
+        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_SOURCE_DIR}/lib/glm ${CMAKE_SOURCE_DIR}/vendor/glm
+        WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/intermediates/glm"
+        )
+execute_process(COMMAND "${CMAKE_COMMAND}"
+        --build ${CMAKE_SOURCE_DIR}/intermediates/glm
         --config ${CMAKE_BUILD_TYPE} --target install)

@@ -17,16 +17,16 @@ void PhysicsManager::deleteEngine()
 {
     if (mEngine != NULL)
     {
-        mEngine.destroy();
+        mEngine->destroy();
         delete mEngine;
     }
 }
 
-void PhysicsManager::PhysicsManager()
+PhysicsManager::PhysicsManager()
 {
 }
 
-void PhysicsManager::~PhysicsManager()
+PhysicsManager::~PhysicsManager()
 {
     deleteEngine();
 }
@@ -35,7 +35,7 @@ void PhysicsManager::configure()
 {
     if (mEngine != NULL)
     {
-        mEngine.configure();
+        mEngine->configure();
     }
 }
 
@@ -43,7 +43,7 @@ void PhysicsManager::start()
 {
     if (mEngine != NULL)
     {
-        mEngine.start();
+        mEngine->start();
     }
 }
 
@@ -51,7 +51,7 @@ void PhysicsManager::stop()
 {
     if (mEngine != NULL)
     {
-        mEngine.stop();
+        mEngine->stop();
     }
 }
 
@@ -59,6 +59,6 @@ void PhysicsManager::update()
 {
     if (mEngine != NULL)
     {
-        mEngine.update();
+        mEngine->update();
     }
 }

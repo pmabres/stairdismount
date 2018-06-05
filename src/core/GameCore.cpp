@@ -1,21 +1,26 @@
 #include <iostream>
 #include "GameCore.h"
+#include "input/EventManager.h"
 
 namespace Game
 {
-    GameCore::GameCore(const sf::Uint32& width, const sf::Uint32& height) :
-            mWindow(sf::VideoMode(width, height), "OpenGL"),
+    GameCore::GameCore() :
+            mWindow(sf::VideoMode(Configuration::GetWidth(), Configuration::GetHeight()), "OpenGL"),
             mRenderThread(&GameCore::gameLoop, this)
     {
+        mWindowListener = new GameWindowListener(*this);
     }
 
     GameCore::~GameCore()
     {
+        delete mWindowListener;
     }
 
     void GameCore::init()
     {
+        mWindow.setSize(sf::Vector2(Configuration::GetWidth(), Configuration::GetHeight()));
         mWindow.setActive(false);
+        mEventManager.subscribe(*mWindowListener);
         mPhysicsManager.createEngine(Engines::Bullet);
         mPhysicsManager.configure();
         mRunning = true;
@@ -26,43 +31,37 @@ namespace Game
 
     void GameCore::gameLoop()
     {
+        mRenderer.configure();
         mWindow.setActive(true);
         mPhysicsManager.start();
         while (mRunning)
         {
-            onRender();
             onUpdate();
+            onRender();
         }
         mPhysicsManager.stop();
     }
     void GameCore::onRender()
     {
-        sf::Event event {};
-        while (mWindow.pollEvent(event))
-        {
-            if (event.type == sf::Event::Resized)
-            {
-                mRenderer.resize(event.size.width, event.size.height);
-            }
-        }
+
         mRenderer.draw();
         mWindow.display();
     }
 
     void GameCore::onUpdate()
     {
+        GTime::update(mWindow);
+        mEventManager.update(mWindow);
         mPhysicsManager.update();
-        // handle events
-        sf::Event event;
-        while (mWindow.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-            {
-                std::cout << "Closing window" << std::endl;
-                mRunning = false;
-            }
-        }
+
     }
+
+    void GameCore::stopGame()
+    {
+        mRunning = false;
+    }
+
+
 }
 //
 //

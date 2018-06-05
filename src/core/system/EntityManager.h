@@ -1,10 +1,6 @@
-//
-// Created by pancho on 04-Jun-18.
-//
+#pragma once
 
-#ifndef GAME_ENTITYMANAGER_H
-#define GAME_ENTITYMANAGER_H
-
+#include "interfaces/IEntity.h"
 
 class EntityManager
 {
@@ -13,6 +9,3 @@ public:
     virtual ~EntityManager();
     void addEntity(IEntity entity);
 };
-
-
-#endif //GAME_ENTITYMANAGER_H

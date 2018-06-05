@@ -4,3 +4,7 @@ lib/
 *bin/
 .idea/
 .vs/
+cmake-build-debug/
+cmake-build-release/
+CMakeFiles/
+CMakeCache.txt

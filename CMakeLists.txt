@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD 11)
 # Variables
 set(GAME_LIBRARIES_DIR "${CMAKE_SOURCE_DIR}/lib")
 set(HELPERS_DIR "${CMAKE_SOURCE_DIR}/helpers")
-
+set(INTERMEDIATES_DIR "${CMAKE_SOURCE_DIR}/intermediates")
 include(${HELPERS_DIR}/ucm.cmake)
 
 # Binary
@@ -12,7 +12,7 @@ set(EXECUTABLE_NAME "Game")
 project(${EXECUTABLE_NAME})
 ucm_add_dirs(src TO SOURCES RECURSIVE)
 message(${SOURCES})
-add_executable(${EXECUTABLE_NAME} ${SOURCES})
+add_executable(${EXECUTABLE_NAME} ${SOURCES} src/core/input/EventManager.cpp src/core/input/EventManager.h src/core/time/GTime.cpp src/core/time/GTime.h src/core/input/interfaces/EventSubscriber.h src/core/input/interfaces/EventSubscriber.cpp src/core/input/implementation/GameWindowListener.cpp src/core/input/implementation/GameWindowListener.h src/core/Configuration.h)
 # We make it fully static
 ucm_set_runtime(STATIC)
 
@@ -20,8 +20,8 @@ ucm_set_runtime(STATIC)
 include(${HELPERS_DIR}/BuildDependencies.cmake)
 
 # Modules
-set(CMAKE_MODULE_PATH "${GAME_LIBRARIES_DIR}/SFML/lib/cmake/SFML" ${CMAKE_MODULE_PATH})
-set(CMAKE_PREFIX_PATH "${GAME_LIBRARIES_DIR}/SFML/lib/cmake/SFML" ${CMAKE_PREFIX_PATH})
+set(CMAKE_MODULE_PATH "${GAME_LIBRARIES_DIR}" ${CMAKE_MODULE_PATH})
+set(CMAKE_PREFIX_PATH "${GAME_LIBRARIES_DIR}" ${CMAKE_PREFIX_PATH})
 set(CMAKE_PREFIX_PATH ${HELPERS_DIR} ${CMAKE_MODULE_PATH})
 
 # SFML
@@ -29,7 +29,7 @@ set(SFML_ROOT "${GAME_LIBRARIES_DIR}/SFML")
 set(SFML_STATIC_LIBRARIES TRUE)
 find_package(SFML 2 REQUIRED graphics window system)
 if(SFML_FOUND)
-    include(helpers/IncludeSFML.cmake)
+    include(${HELPERS_DIR}/IncludeSFML.cmake)
     include_directories(${SFML_INCLUDE_DIR})
     target_link_libraries(${EXECUTABLE_NAME} sfml-graphics)
 endif()
@@ -50,3 +50,9 @@ if (OPENGL_FOUND)
     include_directories(${OPENGL_INCLUDE_DIR})
     target_link_libraries(${EXECUTABLE_NAME} ${OPENGL_LIBRARIES})
 endif()
+
+
+# GLM
+#find_package(glm REQUIRED)
+#include_directories(${GLM_INCLUDE_DIRS})
+include_directories(${CMAKE_SOURCE_DIR}/vendor/glm)

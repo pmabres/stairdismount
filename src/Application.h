@@ -1,7 +1,7 @@
-#include "core/GameCore.h"
+#pragma once
 
-#ifndef GAME_APPLICATION_H
-#define GAME_APPLICATION_H
+#include "core/GameCore.h"
+#include "core/Configuration.h"
 
 namespace Game
 {
@@ -12,10 +12,7 @@ namespace Game
         virtual ~Application();
         void start();
     private:
-        GameCore* mCore;
+        GameCore& mCore;
     };
 
 }
-
-
-#endif //GAME_APPLICATION_H

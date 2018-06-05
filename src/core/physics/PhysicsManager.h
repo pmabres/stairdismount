@@ -1,7 +1,7 @@
+#pragma once
+
 #include "interfaces/PhysicsEngine.h"
 #include "bullet/Loader.h"
-#ifndef GAME_PHYSICSMANAGER_H
-#define GAME_PHYSICSMANAGER_H
 
 enum class Engines { Bullet };
 class PhysicsManager final
@@ -17,8 +17,5 @@ public:
     void stop();
     void update();
 private:
-    PhysicsEngine mEngine;
+    PhysicsEngine* mEngine;
 };
-
-
-#endif //GAME_PHYSICSMANAGER_H

@@ -1,11 +1,13 @@
+#pragma once
+
 #include <SFML/Window.hpp>
 #include "graphics/DrawEngine.h"
 #include <atomic>
 #include "physics/PhysicsManager.h"
-
-#ifndef GLGAME_GAMECORE_H
-#define GLGAME_GAMECORE_H
-
+#include "time/GTime.h"
+#include "input/EventManager.h"
+#include "input/implementation/GameWindowListener.h"
+#include "Configuration.h"
 
 namespace Game
 {
@@ -13,24 +15,31 @@ namespace Game
     {
     public:
 
-        GameCore(const sf::Uint32 &width, const sf::Uint32 &height);
-        virtual ~GameCore( );
-
+        virtual ~GameCore();
         void init();
+        void stopGame();
 
+        static GameCore& getInstance()
+        {
+            static GameCore instance; // Guaranteed to be destroyed.
+            // Instantiated on first use.
+            return instance;
+        }
+        GameCore(GameCore const&) = delete;
+        void operator=(GameCore const&) = delete;
 
     private:
+        GameCore();
         sf::Thread mRenderThread;
         sf::Window mWindow;
         DrawEngine mRenderer;
         std::atomic<bool> mRunning;
         PhysicsManager mPhysicsManager;
+        EventManager mEventManager;
+        GameWindowListener* mWindowListener;
         void gameLoop();
         void onRender();
         void onUpdate();
     };
-
 }
-
-#endif //GLGAME_GAMECORE_H
 

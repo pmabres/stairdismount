@@ -21,6 +21,7 @@ public:
     void start();
     void stop();
     void update();
+    void addObject(PhysicsObject physicsObject);
 private:
     PhysicsEngine *mEngine;
 };

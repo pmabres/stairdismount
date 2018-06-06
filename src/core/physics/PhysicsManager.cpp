@@ -57,4 +57,8 @@ void PhysicsManager::update()
         mEngine->update();
     }
 }
+void PhysicsManager::addObject(PhysicsObject physicsObject)
+{
+    mEngine->addObject(physicsObject);
+}
 }

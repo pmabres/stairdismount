@@ -26,7 +26,19 @@ void Bullet::configure()
             new btDiscreteDynamicsWorld(mDispatcher, mOverlappingPairCache, mSolver, mCollisionConfiguration);
         mDynamicsWorld->setGravity(btVector3(0, -9.81f, 0));
         mInitialized = true;
-        test();
+
+//
+//        {
+//            btCollisionShape *ground = new btStaticPlaneShape(btVector3(0, 1, 0), 1);
+//
+//            btDefaultMotionState* groundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0,0,0)));
+//
+//            btRigidBody::btRigidBodyConstructionInfo groundRigidBodyCI(0, groundMotionState, ground, btVector3(0, 0, 0));
+//
+//            btRigidBody *groundRigidBody = new btRigidBody(groundRigidBodyCI);
+//
+//            world->addRigidBody(groundRigidBody);
+//        }
     }
 }
 
@@ -144,6 +156,10 @@ void Bullet::destroy()
         mCollisionShapes.clear();
         mInitialized = false;
     }
+}
+void Bullet::addObject(PhysicsObject physicsObject)
+{
+
 }
 
 }

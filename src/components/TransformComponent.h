@@ -12,6 +12,7 @@ public:
     ~TransformComponent();
 
     Transform getTransform();
+    void setTransform(Transform transform);
     void update() override;
     void draw() override;
     void start() override;

@@ -7,17 +7,17 @@
 
 namespace Game
 {
-class Bullet final: public PhysicsEngine
+class Bullet : public PhysicsEngine
 {
 public:
     Bullet();
     ~Bullet();
-    void configure();
-    void start();
-    void update();
-    void stop();
-    void destroy();
-    void test();
+    void configure() override;
+    void start() override;
+    void update() override;
+    void stop() override;
+    void destroy() override;
+    void addObject(PhysicsObject physicsObject) override;
 private:
     btDefaultCollisionConfiguration *mCollisionConfiguration;
     btCollisionDispatcher *mDispatcher;

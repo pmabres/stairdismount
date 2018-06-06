@@ -7,8 +7,10 @@ namespace Game
 {
 class BulletTransform: PhysicsTransform
 {
+public:
+    BulletTransform(btTransform& transform);
+    Transform fromPhysics();
 private:
-    void something();
-    btTransform mTransform;
+    btTransform& mTransform;
 };
 }

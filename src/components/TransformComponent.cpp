@@ -12,7 +12,6 @@ TransformComponent::~TransformComponent()
 }
 void TransformComponent::update()
 {
-
 }
 void TransformComponent::draw()
 {
@@ -38,5 +37,8 @@ Transform TransformComponent::getTransform()
 {
     return mTransform;
 }
-
+void TransformComponent::setTransform(Transform transform)
+{
+    mTransform = transform;
+}
 }

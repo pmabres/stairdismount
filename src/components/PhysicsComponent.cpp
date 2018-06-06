@@ -13,7 +13,7 @@ PhysicsComponent::~PhysicsComponent()
 void PhysicsComponent::update()
 {
    Transform transform = entity->getComponent<TransformComponent>().getTransform();
-
+    setTransform
 }
 void PhysicsComponent::draw()
 {

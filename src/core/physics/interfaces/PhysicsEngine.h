@@ -1,5 +1,5 @@
 #pragma once
-
+#include "PhysicsObject.h"
 namespace Game
 {
 class PhysicsEngine
@@ -10,6 +10,7 @@ public:
     virtual void update() = 0;
     virtual void stop() = 0;
     virtual void destroy() = 0;
+    virtual void addObject(PhysicsObject physicsObject) = 0;
 };
 }
 

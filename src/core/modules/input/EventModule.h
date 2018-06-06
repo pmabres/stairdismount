@@ -10,7 +10,7 @@ namespace Game
 {
 class EventSubscriber;
 
-class EventModule : Module
+class EventModule : public Module
 {
 public:
     EventModule(sf::Window &window);

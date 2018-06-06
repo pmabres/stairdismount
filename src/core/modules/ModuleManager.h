@@ -5,11 +5,11 @@
 #include <typeindex>
 namespace Game
 {
-class ModuleManager final : Module
+class ModuleManager : public Module
 {
 public:
-    ModuleManager() = default;
-    ~ModuleManager() = default;
+    ModuleManager();
+    ~ModuleManager();
     void update() override;
     void draw() override;
     void start() override;
@@ -18,7 +18,10 @@ public:
     void cleanup() override;
     void add(Module* entity);
     template<class T>
-    T& get();
+    T& get()
+    {
+        return static_cast<T&> (*mModules.find(typeid(T))->second);
+    }
 private:
     std::unordered_map<std::type_index, Module* > mModules;
 };

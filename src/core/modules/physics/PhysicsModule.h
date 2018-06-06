@@ -1,10 +1,11 @@
 #pragma once
 
 #include "../../physics/PhysicsManager.h"
+#include "../interfaces/Module.h"
 
 namespace Game
 {
-class PhysicsModule : Module
+class PhysicsModule : public Module
 {
 public:
     PhysicsModule();

@@ -2,6 +2,7 @@ file (MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/intermediates/SFML")
 file (MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/intermediates/bullet3")
 file (MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/intermediates/glm")
 file (MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/intermediates/glew")
+file (MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/intermediates/assimp")
 
 execute_process(COMMAND "${CMAKE_COMMAND}"
         -G ${CMAKE_GENERATOR}

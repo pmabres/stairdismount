@@ -21,7 +21,7 @@ void PhysicsManager::deleteEngine()
     }
 }
 
-PhysicsManager::PhysicsManager()
+PhysicsManager::PhysicsManager() : mEngine(nullptr)
 {
 }
 

@@ -7,7 +7,8 @@ GameCore::GameCore()
     :
     mWindow(sf::VideoMode(800, 600), "OpenGL", sf::Style::Default, sf::ContextSettings(24, 8, 0, 2, 1 )),
     mRenderThread(&GameCore::gameLoop, this),
-    mWindowListener(new GameWindowListener(*this))
+    mWindowListener(new GameWindowListener(*this)),
+    mModuleManager()
 {
 }
 
@@ -25,7 +26,6 @@ void GameCore::init()
     getModule<EventModule>().subscribe(*mWindowListener);
     auto physicsModule = getModule<PhysicsModule>();
     physicsModule.createEngine(PhysicsEngines::Bullet);
-    mModuleManager.configure();
     mRunning = true;
     gameLoop();
 //        mRenderThread.launch();
@@ -35,6 +35,7 @@ void GameCore::init()
 void GameCore::gameLoop()
 {
     mWindow.setActive(true);
+    mModuleManager.configure();
     mModuleManager.start();
     while (mRunning) {
         onUpdate();
@@ -58,12 +59,6 @@ void GameCore::onUpdate()
 void GameCore::stopGame()
 {
     mRunning = false;
-}
-
-template<class T>
-T &GameCore::getModule()
-{
-    return mModuleManager.get<T>();
 }
 
 }

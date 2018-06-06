@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <string>
 
-
 // Very, VERY simple OBJ loader.
 // Here is a short list of features a real function would provide :
 // - Binary files. Reading a model should be just a few memcpy's away, not parsing a file at runtime. In short : OBJ is not very great.
@@ -120,4 +119,37 @@ bool ObjLoader::loadObj(const char *path,
     return true;
 }
 
+bool ObjLoader::loadObj2(const char *path,
+                        std::vector<glm::vec3> &out_vertices,
+                        std::vector<glm::vec2> &out_uvs,
+                        std::vector<glm::vec3> &out_normals)
+{
+    {
+        obj::Model model = obj::loadModelFromFile(path);
+        glm::uint32 size = model.vertex.size();
+        // Fill vertices positions
+        out_vertices.reserve(size);
+        out_normals.reserve(size);
+        for(unsigned int i=0; i < size; i+=3){
+            glm::vec3 pos (model.vertex[i],
+                           model.vertex[i+1],
+                           model.vertex[i+2]);
+
+            glm::vec3 nrm (model.normal[i],
+                           model.normal[i+1],
+                           model.normal[i+2]);
+
+            out_vertices.push_back(pos);
+            out_normals.push_back(nrm);
+        }
+        size = model.texCoord.size();
+        out_uvs.reserve(size);
+        for(unsigned int i=0; i < size; i+=2){
+            glm::vec2 uv (model.vertex[i],
+                          model.vertex[i+2]);
+
+            out_uvs.push_back(uv);
+        }
+    }
+}
 }

@@ -7,19 +7,16 @@ ModuleManager::ModuleManager() : mModules()
 {
 }
 
-template<class T>
-T &ModuleManager::get()
-{
-    return static_cast<T &> (mModules.find(typeid(T)));
-}
-void ModuleManager::add(Module *entity)
-{
-    mModules.insert(std::pair<std::type_index, Module *>(typeid(*entity), entity));
-}
 ModuleManager::~ModuleManager()
 {
     cleanup();
 }
+
+void ModuleManager::add(Module *entity)
+{
+    mModules.insert(std::pair<std::type_index, Module *>(typeid(*entity), entity));
+}
+
 
 void ModuleManager::start()
 {

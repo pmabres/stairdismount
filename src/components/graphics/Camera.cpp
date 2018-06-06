@@ -222,9 +222,9 @@ void Camera::verifyMovement()
 {
 
     float speed = 0.01f; // 3 units / second
-
-    uint32_t deltaTime = GTime::getDelta();
-    uint32_t totalTime = GTime::getTotal();
+//
+//    uint32_t deltaTime = GTime::getDelta();
+//    uint32_t totalTime = GTime::getTotal();
     float horizontalAngle = 0;
     float verticalAngle = 0;
 
@@ -248,7 +248,7 @@ void Camera::verifyMovement()
 
     // Up vector
     glm::vec3 up = glm::cross(right, direction);
-    float speedOverTime = deltaTime * speed;
+    float speedOverTime = 0;//deltaTime * speed;
     // Move forward
     if (mMoveUp) {
         mPosition += direction * speedOverTime;

@@ -4,9 +4,10 @@
 #include "modules/graphics/DrawModule.h"
 #include "modules/physics/PhysicsModule.h"
 #include "modules/input/EventModule.h"
+#include "modules/ModuleManager.h"
 #include "time/GTime.h"
 #include "input/implementation/GameWindowListener.h"
-#include "modules/ModuleManager.h"
+
 
 namespace Game
 {
@@ -18,8 +19,12 @@ public:
     void init();
     void stopGame();
 
+
     template<class T>
-    T& getModule();
+    T& getModule()
+    {
+        return mModuleManager.get<T>();
+    }
 
     static GameCore& get()
     {
@@ -31,6 +36,7 @@ public:
 
 private:
     GameCore();
+    ~GameCore();
     sf::Thread mRenderThread;
     sf::Window mWindow;
     std::atomic<bool> mRunning;

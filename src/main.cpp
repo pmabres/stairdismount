@@ -1,6 +1,8 @@
 #include "Application.h"
 #include "core/entity/Entity.h"
 #include "components/MeshComponent.h"
+#include "components/graphics/Camera.h"
+#include "components/graphics/CameraController.h"
 
 using namespace Game;
 int main()
@@ -8,8 +10,11 @@ int main()
     Application app;
 
     auto sampleEntity = GameCore::get().addEntity();
+    auto camera = GameCore::get().addEntity();
     sampleEntity->addComponent(new MeshComponent());
-    sampleEntity->getComponent<MeshComponent>().loadMesh("suzanne.obj");
+    camera->addComponent(new Camera());
+    camera->addComponent(new CameraController());
+    sampleEntity->getComponent<MeshComponent>().loadMesh("cube.obj");
 
     app.start();
 }

@@ -1,4 +1,5 @@
 #include "Bullet.h"
+#include "../../GameCore.h"
 
 namespace Game
 {
@@ -16,13 +17,14 @@ Bullet::~Bullet()
 void Bullet::configure()
 {
     if (!mInitialized) {
+
         mCollisionConfiguration = new btDefaultCollisionConfiguration();
         mDispatcher = new btCollisionDispatcher(mCollisionConfiguration);
         mOverlappingPairCache = new btDbvtBroadphase();
         mSolver = new btSequentialImpulseConstraintSolver;
         mDynamicsWorld =
             new btDiscreteDynamicsWorld(mDispatcher, mOverlappingPairCache, mSolver, mCollisionConfiguration);
-        mDynamicsWorld->setGravity(btVector3(0, -10, 0));
+        mDynamicsWorld->setGravity(btVector3(0, -9.81f, 0));
         mInitialized = true;
         test();
     }

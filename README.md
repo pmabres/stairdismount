@@ -54,6 +54,11 @@ Also there are two scripts provided for Windows and Unix systems.
 
 Both provide a default run on cmake that will get the project linked and compiled.
             
+            
+### Usage
+
+Camera Controls:
+JKLI to rotate, Up,right,down,left arrows to move the camara
              
 TroubleShooting:
 

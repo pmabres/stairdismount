@@ -5,7 +5,6 @@
 
 namespace Game
 {
-class GameCore;
 class GameWindowListener: public WindowSubscriber
 {
 public:

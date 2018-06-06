@@ -18,7 +18,6 @@ public:
     void cleanup() override;
 private:
 
-
 };
 
 }

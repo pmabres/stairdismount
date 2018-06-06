@@ -21,7 +21,7 @@ static const char gFragmentShader[] =
 "\n"
 "void main(){\n"
 "\n"
-"    vec3 LightColor = vec3(1,1,1);\n"
+"    vec3 LightColor = vec3(.3f,.3f,.3f);\n"
 "    float LightPower = 50.0f;\n"
 "    vec3 MaterialDiffuseColor = texture2D( myTextureSampler, UV ).rgb;\n"
 "    vec3 MaterialAmbientColor = vec3(0.1,0.1,0.1) * MaterialDiffuseColor;\n"

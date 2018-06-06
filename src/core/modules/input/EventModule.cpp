@@ -44,6 +44,6 @@ void EventModule::configure()
 }
 void EventModule::cleanup()
 {
-
+    mEventListeners.clear();
 }
 }

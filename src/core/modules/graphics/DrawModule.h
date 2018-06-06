@@ -8,6 +8,7 @@
 #include "../../resources/RenderObject.h"
 #include "../../structs/ShaderData.h"
 #include "../../structs/RenderStructure.h"
+#include "../../structs/CameraData.h"
 namespace Game
 {
 
@@ -25,6 +26,7 @@ public:
     //TODO: Add remove mesh.
     glm::uint32 addMesh(MeshTransform &meshTransform);
     void drawMesh(glm::uint32 index, Transform transform);
+    void setProjection(CameraData cameraData);
     //void resize(const sf::Uint32 &width, const sf::Uint32 &height);
 private:
     void clear();
@@ -36,6 +38,7 @@ private:
     //TODO: Handle better the references so we don't copy the structure.
     std::vector<RenderStructure> mMeshVector;
     RenderObject mRenderObject;
+    CameraData mCameraData;
 //    Camera mCamera;
 };
 }

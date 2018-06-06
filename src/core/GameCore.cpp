@@ -7,7 +7,7 @@ GameCore::GameCore()
     :
     mWindow(sf::VideoMode(800, 600), "OpenGL", sf::Style::Default, sf::ContextSettings(24, 8, 0, 2, 1 )),
     mRenderThread(&GameCore::gameLoop, this),
-    mWindowListener(new GameWindowListener(*this)),
+    mWindowListener(new GameWindowListener()),
     mModuleManager()
 {
     mModuleManager.add(new DrawModule());
@@ -66,6 +66,10 @@ void GameCore::stopGame()
 Entity* GameCore::addEntity()
 {
     return getModule<EntitiesModule>().add();
+}
+sf::Window &GameCore::getWindow()
+{
+    return mWindow;
 }
 }
 //

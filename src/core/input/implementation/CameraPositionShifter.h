@@ -1,19 +1,18 @@
 #pragma once
 
-#include "../interfaces/WindowSubscriber.h"
-#include "../../GameCore.h"
+#include "../interfaces/KeyboardSubscriber.h"
+#include "../../../components/graphics/Camera.h"
 
 namespace Game
 {
-class GameCore;
-class GameWindowListener: public KeyboardSubscriber
+class CameraPositionShifter: public KeyboardSubscriber
 {
 public:
-    GameWindowListener(GameCore &core);
-    void onWindowClose() override;
-    void onWindowResize(int width, int height) override;
+    CameraPositionShifter(Camera& camera);
+    void onKeyPress(sf::Event::KeyEvent event) override;
+    void onKeyUp(sf::Event::KeyEvent event) override;
 private:
-    GameCore &mCore;
+    Camera& mCamera;
 };
 
 }

@@ -9,7 +9,6 @@
 #include "time/GTime.h"
 #include "input/implementation/GameWindowListener.h"
 
-
 namespace Game
 {
 
@@ -19,6 +18,7 @@ class GameCore
 public:
     void init();
     void stopGame();
+    sf::Window& getWindow();
     Entity* addEntity();
 
     template<class T>

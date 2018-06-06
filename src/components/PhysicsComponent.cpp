@@ -21,7 +21,7 @@ void PhysicsComponent::draw()
 }
 void PhysicsComponent::start()
 {
-
+   //GameCore::get().getModule<PhysicsModule>().addRigidBody(mRigidBody);
 }
 void PhysicsComponent::stop()
 {

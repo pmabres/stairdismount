@@ -40,4 +40,9 @@ void PhysicsModule::cleanup()
 {
     mPhysicsManager.deleteEngine();
 }
+
+PhysicsObject *PhysicsModule::createPhysicsObject(Transform transform)
+{
+    return mPhysicsManager.createObject(transform);
+}
 }

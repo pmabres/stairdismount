@@ -1,5 +1,6 @@
 #include "Bullet.h"
 #include "../../GameCore.h"
+#include "BulletObject.h"
 
 namespace Game
 {
@@ -41,21 +42,15 @@ void Bullet::configure()
 //        }
     }
 }
-
-void Bullet::test()
+void Bullet::addObjectToWorld(BulletObject *bulletObject)
 {
-    ///create a few basic rigid bodies
-    //the ground is a cube of side 100 at position y = -56.
-    //the sphere will hit it at y = -6, with center at -5
 
-    btCollisionShape *groundShape = new btBoxShape(btVector3(btScalar(50.), btScalar(50.), btScalar(50.)));
+    //TODO: Get shape by params.
+    btCollisionShape *objectShape = new btBoxShape(btVector3(btScalar(50.), btScalar(50.), btScalar(50.)));
 
-    mCollisionShapes.push_back(groundShape);
+    mCollisionShapes.push_back(objectShape);
 
-    btTransform groundTransform;
-    groundTransform.setIdentity();
-    groundTransform.setOrigin(btVector3(0, -56, 0));
-
+    //get mass as params
     btScalar mass(0.f);
 
     //rigidbody is dynamic if and only if mass is non zero, otherwise static
@@ -63,41 +58,15 @@ void Bullet::test()
 
     btVector3 localInertia(0, 0, 0);
     if (isDynamic)
-        groundShape->calculateLocalInertia(mass, localInertia);
+        objectShape->calculateLocalInertia(mass, localInertia);
 
     //using motionstate is optional, it provides interpolation capabilities, and only synchronizes 'active' objects
-    auto myMotionState = new btDefaultMotionState(groundTransform);
-    btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, groundShape, localInertia);
+    auto myMotionState = new btDefaultMotionState(bulletObject->nativeTransform().getNativeTransform());
+    btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, objectShape, localInertia);
     auto body = new btRigidBody(rbInfo);
 
     //add the body to the dynamics world
     mDynamicsWorld->addRigidBody(body);
-
-
-
-    //create a dynamic rigidbody
-
-    //btCollisionShape* colShape = new btBoxShape(btVector3(1,1,1));
-    btCollisionShape *colShape = new btSphereShape(btScalar(1.));
-    mCollisionShapes.push_back(colShape);
-
-    /// Create Dynamic Objects
-    btTransform startTransform;
-    startTransform.setIdentity();
-
-    mass = 1.f;
-
-    localInertia = btVector3(0, 0, 0);
-    colShape->calculateLocalInertia(mass, localInertia);
-
-    startTransform.setOrigin(btVector3(2, 10, 0));
-
-    //using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
-    btDefaultMotionState *myMotionState2 = new btDefaultMotionState(startTransform);
-    btRigidBody::btRigidBodyConstructionInfo rbInfo2(mass, myMotionState2, colShape, localInertia);
-    btRigidBody *body2 = new btRigidBody(rbInfo2);
-
-    mDynamicsWorld->addRigidBody(body2);
 }
 
 void Bullet::start()
@@ -130,8 +99,14 @@ void Bullet::stop()
 
 void Bullet::destroy()
 {
+    auto i = 0;
+    for (i ; i < mPhysicsObjectVector.size(); i++)
+    {
+        delete mPhysicsObjectVector.at(i);
+    }
+    mPhysicsObjectVector.clear();
+
     if (mInitialized) {
-        auto i = 0;
         for (i = mDynamicsWorld->getNumCollisionObjects() - 1; i >= 0; i--) {
             btCollisionObject *obj = mDynamicsWorld->getCollisionObjectArray()[i];
             btRigidBody *body = btRigidBody::upcast(obj);
@@ -157,9 +132,13 @@ void Bullet::destroy()
         mInitialized = false;
     }
 }
-void Bullet::addObject(PhysicsObject physicsObject)
-{
 
+PhysicsObject* Bullet::createObject(Transform transform)
+{
+    auto physicsObject = new BulletObject(transform);
+    mPhysicsObjectVector.push_back(physicsObject);
+    addObjectToWorld(physicsObject);
+    return physicsObject;
 }
 
 }

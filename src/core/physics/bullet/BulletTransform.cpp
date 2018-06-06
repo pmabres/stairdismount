@@ -1,7 +1,3 @@
-//
-// Created by pancho on 04-Jun-18.
-//
-
 #include "BulletTransform.h"
 
 namespace Game
@@ -14,8 +10,17 @@ Transform BulletTransform::fromPhysics()
     transform.position.z = mTransform.getOrigin().z();
     return transform;
 }
-BulletTransform::BulletTransform(btTransform& transform): mTransform(transform)
+BulletTransform::BulletTransform(Transform transform) : mTransform()
 {
-
+    mTransform.setIdentity();
+    setTransform(transform);
+}
+void BulletTransform::setTransform(Transform transform)
+{
+    mTransform.setOrigin(btVector3(transform.position.x, transform.position.y, transform.position.z));
+}
+btTransform& BulletTransform::getNativeTransform()
+{
+    return mTransform;
 }
 }

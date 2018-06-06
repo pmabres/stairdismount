@@ -12,8 +12,12 @@ PhysicsComponent::~PhysicsComponent()
 }
 void PhysicsComponent::update()
 {
-   Transform transform = entity->getComponent<TransformComponent>().getTransform();
-    setTransform
+    if (mConfigured)
+    {
+        Transform transform = mPhysicsObject->transform().fromPhysics();
+        entity->getComponent<TransformComponent>().setTransform(transform);
+    }
+
 }
 void PhysicsComponent::draw()
 {
@@ -21,7 +25,6 @@ void PhysicsComponent::draw()
 }
 void PhysicsComponent::start()
 {
-   //GameCore::get().getModule<PhysicsModule>().addRigidBody(mRigidBody);
 }
 void PhysicsComponent::stop()
 {
@@ -29,11 +32,13 @@ void PhysicsComponent::stop()
 }
 void PhysicsComponent::configure()
 {
-
+//    mConfigured = true;
+//    mPhysicsObject = GameCore::get().getModule<PhysicsModule>()
+//        .createPhysicsObject(entity->getComponent<TransformComponent>().getTransform());
 }
 void PhysicsComponent::cleanup()
 {
-
+    mConfigured = false;
 }
 
 

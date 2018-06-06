@@ -5,12 +5,14 @@
 
 namespace Game
 {
-class BulletTransform: PhysicsTransform
+class BulletTransform: public PhysicsTransform
 {
 public:
-    BulletTransform(btTransform& transform);
+    BulletTransform(Transform transform);
     Transform fromPhysics();
+    void setTransform(Transform transform) override;
+    btTransform& getNativeTransform();
 private:
-    btTransform& mTransform;
+    btTransform mTransform;
 };
 }

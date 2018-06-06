@@ -1,7 +1,3 @@
-//
-// Created by pancho on 6/5/18.
-//
-
 #include <iostream>
 #include "GTime.h"
 namespace Game

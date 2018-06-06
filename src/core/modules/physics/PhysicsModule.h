@@ -11,6 +11,7 @@ public:
     PhysicsModule();
     void createEngine(PhysicsEngines engine);
     void deleteEngine();
+    PhysicsObject* createPhysicsObject(Transform transform);
     void update() override;
     virtual void draw() override;
     virtual void start() override;

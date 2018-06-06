@@ -3,7 +3,7 @@
 #include "components/MeshComponent.h"
 #include "components/graphics/Camera.h"
 #include "components/graphics/CameraController.h"
-
+//Todo: this could be cleaned up a little bit.
 using namespace Game;
 int main()
 {

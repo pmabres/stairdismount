@@ -17,7 +17,8 @@ public:
     void configure() override;
     void cleanup() override;
 private:
-
+    PhysicsObject* mPhysicsObject;
+    bool mConfigured;
 };
 
 }

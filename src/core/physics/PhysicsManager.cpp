@@ -57,8 +57,8 @@ void PhysicsManager::update()
         mEngine->update();
     }
 }
-void PhysicsManager::addObject(PhysicsObject physicsObject)
+PhysicsObject* PhysicsManager::createObject(Transform transform)
 {
-    mEngine->addObject(physicsObject);
+    return mEngine->createObject(transform);
 }
 }

@@ -6,7 +6,8 @@ namespace Game
 class PhysicsObject
 {
 public:
-    virtual PhysicsTransform transform() = 0;
+//    virtual void setTransform(PhysicsTransform& transform) = 0;
+    virtual PhysicsTransform& transform() = 0;
 };
 
 }

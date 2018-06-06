@@ -1,13 +1,19 @@
 #pragma once
 #include "../interfaces/PhysicsObject.h"
+#include "BulletTransform.h"
+#include "../interfaces/PhysicsTransform.h"
 namespace Game
 {
 class BulletObject : public PhysicsObject
 {
 public:
-    PhysicsTransform transform();
+    BulletObject(Transform transform);
+    ~BulletObject();
+    PhysicsTransform& transform() override;
+    BulletTransform& nativeTransform();
+
 private:
-    PhysicsTransform transform;
+    BulletTransform mTransform;
 };
 
 }

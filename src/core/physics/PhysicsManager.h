@@ -21,7 +21,7 @@ public:
     void start();
     void stop();
     void update();
-    void addObject(PhysicsObject physicsObject);
+    PhysicsObject* createObject(Transform transform);
 private:
     PhysicsEngine *mEngine;
 };

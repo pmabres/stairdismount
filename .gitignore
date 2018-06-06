@@ -8,3 +8,5 @@ cmake-build-debug/
 cmake-build-release/
 CMakeFiles/
 CMakeCache.txt
+
+vendor/glew-2\.1\.0/glew\.pc

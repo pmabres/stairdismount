@@ -11,8 +11,7 @@ include(${HELPERS_DIR}/ucm.cmake)
 set(EXECUTABLE_NAME "Game")
 project(${EXECUTABLE_NAME})
 ucm_add_dirs(src TO SOURCES RECURSIVE)
-message(${SOURCES})
-add_executable(${EXECUTABLE_NAME} ${SOURCES} src/core/input/EventManager.cpp src/core/input/EventManager.h src/core/time/GTime.cpp src/core/time/GTime.h src/core/input/interfaces/EventSubscriber.h src/core/input/interfaces/EventSubscriber.cpp src/core/input/implementation/GameWindowListener.cpp src/core/input/implementation/GameWindowListener.h src/core/Configuration.h)
+add_executable(${EXECUTABLE_NAME} ${SOURCES})
 # We make it fully static
 ucm_set_runtime(STATIC)
 
@@ -51,8 +50,13 @@ if (OPENGL_FOUND)
     target_link_libraries(${EXECUTABLE_NAME} ${OPENGL_LIBRARIES})
 endif()
 
-
 # GLM
-#find_package(glm REQUIRED)
-#include_directories(${GLM_INCLUDE_DIRS})
-include_directories(${CMAKE_SOURCE_DIR}/vendor/glm)
+find_package(glm REQUIRED)
+include_directories(${GLM_INCLUDE_DIRS})
+
+# GLEW
+set(GLEW_USE_STATIC_LIBS TRUE)
+
+find_package(glew REQUIRED CONFIG)
+include_directories( ${GAME_LIBRARIES_DIR}/glew/include)
+target_link_libraries(${EXECUTABLE_NAME} GLEW::glew_s)

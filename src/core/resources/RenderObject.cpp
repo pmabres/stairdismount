@@ -3,6 +3,10 @@ namespace Game
 {
 bool RenderObject::load(const char *path)
 {
-    mObjLoader.loadObj2(path, out_vertices, out_uvs, out_normals);
+    mObjLoader.loadObj(path, mMeshTransform);
+}
+MeshTransform &RenderObject::getMesh()
+{
+    return mMeshTransform;
 }
 }

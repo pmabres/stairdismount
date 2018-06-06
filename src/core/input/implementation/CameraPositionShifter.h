@@ -6,12 +6,14 @@
 namespace Game
 {
 class GameCore;
-class GameWindowListener: public WindowSubscriber
+class GameWindowListener: public KeyboardSubscriber
 {
 public:
-    GameWindowListener();
+    GameWindowListener(GameCore &core);
     void onWindowClose() override;
     void onWindowResize(int width, int height) override;
+private:
+    GameCore &mCore;
 };
 
 }

@@ -3,7 +3,7 @@
 #include <glm/glm.hpp>
 #include <vector>
 #include "ObjLoader.h"
-
+#include "../structs/MeshTransform.h"
 namespace Game
 {
 class RenderObject
@@ -11,10 +11,9 @@ class RenderObject
 public:
     RenderObject() = default;
     bool load(const char *path);
-    std::vector<glm::vec3> out_vertices;
-    std::vector<glm::vec2> out_uvs;
-    std::vector<glm::vec3> out_normals;
+    MeshTransform& getMesh();
 private:
+    MeshTransform mMeshTransform;
     ObjLoader mObjLoader;
 };
 }

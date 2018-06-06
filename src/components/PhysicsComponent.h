@@ -1,17 +1,15 @@
 #pragma once
 
 #include "interfaces/Component.h"
-#include "../core/structs/Transform.h"
-
+#include "../core/GameCore.h"
 namespace Game
 {
-class TransformComponent: public Component
+class PhysicsComponent: Component
 {
 public:
-    TransformComponent();
-    ~TransformComponent();
+    PhysicsComponent();
+    ~PhysicsComponent();
 
-    Transform getTransform();
     void update() override;
     void draw() override;
     void start() override;
@@ -19,7 +17,7 @@ public:
     void configure() override;
     void cleanup() override;
 private:
-    Transform mTransform;
+
 
 };
 

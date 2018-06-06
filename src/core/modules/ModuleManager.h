@@ -3,6 +3,7 @@
 #include "interfaces/Module.h"
 #include <unordered_map>
 #include <typeindex>
+#include <map>
 namespace Game
 {
 class ModuleManager : public Module
@@ -16,14 +17,14 @@ public:
     void stop() override;
     void configure() override;
     void cleanup() override;
-    void add(Module* entity);
+    void add(Module* module);
     template<class T>
     T& get()
     {
         return static_cast<T&> (*mModules.find(typeid(T))->second);
     }
 private:
-    std::unordered_map<std::type_index, Module* > mModules;
+    std::map<std::type_index, Module* > mModules;
 };
 
 }

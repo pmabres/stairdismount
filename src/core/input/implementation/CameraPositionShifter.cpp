@@ -2,17 +2,18 @@
 
 namespace Game
 {
-GameWindowListener::GameWindowListener()
+GameWindowListener::GameWindowListener(GameCore &core)
+    : mCore(core)
 {
 }
 
 void GameWindowListener::onWindowClose()
 {
-    GameCore::get().stopGame();
+    mCore.stopGame();
 }
 
 void GameWindowListener::onWindowResize(int width, int height)
 {
-    //GameCore::get().resizeWindow(width, height);
+
 }
 }

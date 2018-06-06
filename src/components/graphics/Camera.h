@@ -9,6 +9,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "../../core/input/interfaces/KeyboardSubscriber.h"
 #include "../../core/input/interfaces/MouseSubscriber.h"
+#include "../interfaces/Component.h"
 
 const float PI = glm::pi<float>();
 
@@ -18,13 +19,16 @@ using namespace glm;
 
 namespace Game
 {
-class Camera: public KeyboardSubscriber
+class Camera : public KeyboardSubscriber, public Component
 {
 public:
     Camera(); //inits the values (Position: (0|0|0) Target: (0|0|-1) )
-    void configure();
-    void draw(); //executes some glRotates and a glTranslate command
-    void update();
+    void update() override;
+    void draw() override;
+    void start() override;
+    void stop() override;
+    void configure() override;
+    void cleanup() override;
     //Note: You should call glLoadIdentity before using Render
 
     void move(const vec3 &direction);

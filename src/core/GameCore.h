@@ -4,6 +4,7 @@
 #include "modules/graphics/DrawModule.h"
 #include "modules/physics/PhysicsModule.h"
 #include "modules/input/EventModule.h"
+#include "modules/entities/EntitiesModule.h"
 #include "modules/ModuleManager.h"
 #include "time/GTime.h"
 #include "input/implementation/GameWindowListener.h"
@@ -18,7 +19,7 @@ class GameCore
 public:
     void init();
     void stopGame();
-
+    Entity* addEntity();
 
     template<class T>
     T& getModule()

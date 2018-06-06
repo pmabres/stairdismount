@@ -10,6 +10,10 @@ GameCore::GameCore()
     mWindowListener(new GameWindowListener(*this)),
     mModuleManager()
 {
+    mModuleManager.add(new DrawModule());
+    mModuleManager.add(new EventModule(mWindow));
+    mModuleManager.add(new PhysicsModule());
+    mModuleManager.add(new EntitiesModule());
 }
 
 GameCore::~GameCore()
@@ -20,13 +24,11 @@ GameCore::~GameCore()
 void GameCore::init()
 {
     mWindow.setActive(false);
-    mModuleManager.add(new DrawModule());
-    mModuleManager.add(new EventModule(mWindow));
-    mModuleManager.add(new PhysicsModule());
     getModule<EventModule>().subscribe(*mWindowListener);
     auto physicsModule = getModule<PhysicsModule>();
     physicsModule.createEngine(PhysicsEngines::Bullet);
     mRunning = true;
+    //Lets make it single threaded for now...
     gameLoop();
 //        mRenderThread.launch();
 //        mRenderThread.wait();
@@ -61,6 +63,10 @@ void GameCore::stopGame()
     mRunning = false;
 }
 
+Entity* GameCore::addEntity()
+{
+    return getModule<EntitiesModule>().add();
+}
 }
 //
 //

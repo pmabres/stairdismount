@@ -12,9 +12,9 @@ ModuleManager::~ModuleManager()
     cleanup();
 }
 
-void ModuleManager::add(Module *entity)
+void ModuleManager::add(Module *module)
 {
-    mModules.insert(std::pair<std::type_index, Module *>(typeid(*entity), entity));
+    mModules.insert(std::pair<std::type_index, Module *>(typeid(*module), module));
 }
 
 

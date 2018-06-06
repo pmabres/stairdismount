@@ -1,8 +1,11 @@
 #include "Bullet.h"
 
-Bullet::Bullet() :
-        mInitialized(false),
-        mRunning(false)
+namespace Game
+{
+Bullet::Bullet()
+    :
+    mInitialized(false),
+    mRunning(false)
 {
 
 }
@@ -12,13 +15,13 @@ Bullet::~Bullet()
 }
 void Bullet::configure()
 {
-    if (!mInitialized)
-    {
+    if (!mInitialized) {
         mCollisionConfiguration = new btDefaultCollisionConfiguration();
         mDispatcher = new btCollisionDispatcher(mCollisionConfiguration);
         mOverlappingPairCache = new btDbvtBroadphase();
         mSolver = new btSequentialImpulseConstraintSolver;
-        mDynamicsWorld = new btDiscreteDynamicsWorld(mDispatcher, mOverlappingPairCache, mSolver, mCollisionConfiguration);
+        mDynamicsWorld =
+            new btDiscreteDynamicsWorld(mDispatcher, mOverlappingPairCache, mSolver, mCollisionConfiguration);
         mDynamicsWorld->setGravity(btVector3(0, -10, 0));
         mInitialized = true;
         test();
@@ -31,7 +34,7 @@ void Bullet::test()
     //the ground is a cube of side 100 at position y = -56.
     //the sphere will hit it at y = -6, with center at -5
 
-    btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(50.), btScalar(50.), btScalar(50.)));
+    btCollisionShape *groundShape = new btBoxShape(btVector3(btScalar(50.), btScalar(50.), btScalar(50.)));
 
     mCollisionShapes.push_back(groundShape);
 
@@ -61,7 +64,7 @@ void Bullet::test()
     //create a dynamic rigidbody
 
     //btCollisionShape* colShape = new btBoxShape(btVector3(1,1,1));
-    btCollisionShape* colShape = new btSphereShape(btScalar(1.));
+    btCollisionShape *colShape = new btSphereShape(btScalar(1.));
     mCollisionShapes.push_back(colShape);
 
     /// Create Dynamic Objects
@@ -76,9 +79,9 @@ void Bullet::test()
     startTransform.setOrigin(btVector3(2, 10, 0));
 
     //using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
-    btDefaultMotionState* myMotionState2 = new btDefaultMotionState(startTransform);
+    btDefaultMotionState *myMotionState2 = new btDefaultMotionState(startTransform);
     btRigidBody::btRigidBodyConstructionInfo rbInfo2(mass, myMotionState2, colShape, localInertia);
-    btRigidBody* body2 = new btRigidBody(rbInfo2);
+    btRigidBody *body2 = new btRigidBody(rbInfo2);
 
     mDynamicsWorld->addRigidBody(body2);
 }
@@ -89,20 +92,16 @@ void Bullet::start()
 }
 void Bullet::update()
 {
-    if (mRunning && mInitialized)
-    {
+    if (mRunning && mInitialized) {
         mDynamicsWorld->stepSimulation(1.f / 60.f, 10);
-        for (int j = mDynamicsWorld->getNumCollisionObjects() - 1; j >= 0; j--)
-        {
-            btCollisionObject* obj = mDynamicsWorld->getCollisionObjectArray()[j];
-            btRigidBody* body = btRigidBody::upcast(obj);
+        for (int j = mDynamicsWorld->getNumCollisionObjects() - 1; j >= 0; j--) {
+            btCollisionObject *obj = mDynamicsWorld->getCollisionObjectArray()[j];
+            btRigidBody *body = btRigidBody::upcast(obj);
             btTransform trans;
-            if (body && body->getMotionState())
-            {
+            if (body && body->getMotionState()) {
                 body->getMotionState()->getWorldTransform(trans);
             }
-            else
-            {
+            else {
                 trans = obj->getWorldTransform();
             }
             //printf("world pos object %d = %f,%f,%f\n", j, float(trans.getOrigin().getX()), float(trans.getOrigin().getY()), float(trans.getOrigin().getZ()));
@@ -117,24 +116,20 @@ void Bullet::stop()
 
 void Bullet::destroy()
 {
-    if (mInitialized)
-    {
+    if (mInitialized) {
         auto i = 0;
-        for (i = mDynamicsWorld->getNumCollisionObjects() - 1; i >= 0; i--)
-        {
-            btCollisionObject* obj = mDynamicsWorld->getCollisionObjectArray()[i];
-            btRigidBody* body = btRigidBody::upcast(obj);
-            if (body && body->getMotionState())
-            {
+        for (i = mDynamicsWorld->getNumCollisionObjects() - 1; i >= 0; i--) {
+            btCollisionObject *obj = mDynamicsWorld->getCollisionObjectArray()[i];
+            btRigidBody *body = btRigidBody::upcast(obj);
+            if (body && body->getMotionState()) {
                 delete body->getMotionState();
             }
             mDynamicsWorld->removeCollisionObject(obj);
             delete obj;
         }
 
-        for (int j = 0; j < mCollisionShapes.size(); j++)
-        {
-            btCollisionShape* shape = mCollisionShapes[j];
+        for (int j = 0; j < mCollisionShapes.size(); j++) {
+            btCollisionShape *shape = mCollisionShapes[j];
             mCollisionShapes[j] = 0;
             delete shape;
         }
@@ -149,4 +144,5 @@ void Bullet::destroy()
     }
 }
 
+}
 

@@ -1,22 +1,21 @@
 
 #include "PhysicsManager.h"
 
-void PhysicsManager::createEngine(Engines engine)
+namespace Game
+{
+void PhysicsManager::createEngine(PhysicsEngines engine)
 {
     deleteEngine();
-    switch(engine)
-    {
-        case Engines::Bullet:
-            mEngine = new Bullet();
-            break;
+    switch (engine) {
+    case PhysicsEngines::Bullet:mEngine = new Bullet();
+        break;
     }
 
 }
 
 void PhysicsManager::deleteEngine()
 {
-    if (mEngine != NULL)
-    {
+    if (mEngine != NULL) {
         mEngine->destroy();
         delete mEngine;
     }
@@ -33,32 +32,29 @@ PhysicsManager::~PhysicsManager()
 
 void PhysicsManager::configure()
 {
-    if (mEngine != NULL)
-    {
+    if (mEngine != NULL) {
         mEngine->configure();
     }
 }
 
 void PhysicsManager::start()
 {
-    if (mEngine != NULL)
-    {
+    if (mEngine != NULL) {
         mEngine->start();
     }
 }
 
 void PhysicsManager::stop()
 {
-    if (mEngine != NULL)
-    {
+    if (mEngine != NULL) {
         mEngine->stop();
     }
 }
 
 void PhysicsManager::update()
 {
-    if (mEngine != NULL)
-    {
+    if (mEngine != NULL) {
         mEngine->update();
     }
+}
 }

@@ -1,6 +1,7 @@
 file (MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/intermediates/SFML")
 file (MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/intermediates/bullet3")
 file (MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/intermediates/glm")
+file (MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/intermediates/glew")
 
 execute_process(COMMAND "${CMAKE_COMMAND}"
         -G ${CMAKE_GENERATOR}
@@ -36,4 +37,16 @@ execute_process(COMMAND "${CMAKE_COMMAND}"
         )
 execute_process(COMMAND "${CMAKE_COMMAND}"
         --build ${CMAKE_SOURCE_DIR}/intermediates/glm
+        --config ${CMAKE_BUILD_TYPE} --target install)
+
+execute_process(COMMAND "${CMAKE_COMMAND}"
+        -G ${CMAKE_GENERATOR}
+        -DGLEW_USE_STATIC_LIBS=TRUE
+        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_SOURCE_DIR}/lib/glew ${CMAKE_SOURCE_DIR}/vendor/glew-2.1.0/build/cmake
+        WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/intermediates/glew"
+        )
+
+execute_process(COMMAND "${CMAKE_COMMAND}"
+        --build ${CMAKE_SOURCE_DIR}/intermediates/glew
         --config ${CMAKE_BUILD_TYPE} --target install)

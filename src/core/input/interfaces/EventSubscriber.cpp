@@ -1,6 +1,8 @@
 #include "EventSubscriber.h"
 
-void EventSubscriber::subscribed(EventManager* manager, int hash)
+namespace Game
+{
+void EventSubscriber::subscribed(EventModule *manager, int hash)
 {
     mManager = manager;
     mHash = hash;
@@ -12,4 +14,5 @@ EventSubscriber::~EventSubscriber()
         mManager->unsubscribe(mHash);
     }
 
+}
 }

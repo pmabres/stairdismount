@@ -2,17 +2,16 @@
 
 namespace Game
 {
-    Application::Application() : mCore(GameCore::getInstance())
-    {
-        Configuration::SetSize(800, 600);
-    }
+Application::Application()
+{
+}
 
-    Application::~Application()
-    {
-    }
+Application::~Application()
+{
+}
 
-    void Application::start()
-    {
-        mCore.init();
-    }
+void Application::start()
+{
+    GameCore::get().init();
+}
 }

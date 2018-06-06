@@ -3,19 +3,26 @@
 #include "interfaces/PhysicsEngine.h"
 #include "bullet/Loader.h"
 
-enum class Engines { Bullet };
+namespace Game
+{
+enum class PhysicsEngines
+{
+    Bullet
+};
 class PhysicsManager final
 {
 public:
     PhysicsManager();
     ~PhysicsManager();
 
-    void createEngine(Engines engine);
+    void createEngine(PhysicsEngines engine);
     void deleteEngine();
     void configure();
     void start();
     void stop();
     void update();
 private:
-    PhysicsEngine* mEngine;
+    PhysicsEngine *mEngine;
 };
+
+}

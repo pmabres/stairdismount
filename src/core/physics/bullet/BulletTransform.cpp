@@ -4,6 +4,9 @@
 
 #include "BulletTransform.h"
 
+namespace Game
+{
 void BulletTransform::something()
 {
+}
 }

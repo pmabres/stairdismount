@@ -1,66 +1,70 @@
 #include <iostream>
 #include "GameCore.h"
-#include "input/EventManager.h"
 
 namespace Game
 {
-    GameCore::GameCore() :
-            mWindow(sf::VideoMode(Configuration::GetWidth(), Configuration::GetHeight()), "OpenGL"),
-            mRenderThread(&GameCore::gameLoop, this)
-    {
-        mWindowListener = new GameWindowListener(*this);
-    }
+GameCore::GameCore()
+    :
+    mWindow(sf::VideoMode(800, 600), "OpenGL", sf::Style::Default, sf::ContextSettings(24, 8, 0, 2, 1 )),
+    mRenderThread(&GameCore::gameLoop, this),
+    mWindowListener(new GameWindowListener(*this))
+{
+}
 
-    GameCore::~GameCore()
-    {
-        delete mWindowListener;
-    }
+GameCore::~GameCore()
+{
+    delete mWindowListener;
+}
 
-    void GameCore::init()
-    {
-        mWindow.setSize(sf::Vector2(Configuration::GetWidth(), Configuration::GetHeight()));
-        mWindow.setActive(false);
-        mEventManager.subscribe(*mWindowListener);
-        mPhysicsManager.createEngine(Engines::Bullet);
-        mPhysicsManager.configure();
-        mRunning = true;
-        gameLoop();
+void GameCore::init()
+{
+    mWindow.setActive(false);
+    mModuleManager.add(new DrawModule());
+    mModuleManager.add(new EventModule(mWindow));
+    mModuleManager.add(new PhysicsModule());
+    getModule<EventModule>().subscribe(*mWindowListener);
+    auto physicsModule = getModule<PhysicsModule>();
+    physicsModule.createEngine(PhysicsEngines::Bullet);
+    mModuleManager.configure();
+    mRunning = true;
+    gameLoop();
 //        mRenderThread.launch();
 //        mRenderThread.wait();
+}
+
+void GameCore::gameLoop()
+{
+    mWindow.setActive(true);
+    mModuleManager.start();
+    while (mRunning) {
+        onUpdate();
+        onRender();
     }
+    mModuleManager.stop();
+}
+void GameCore::onRender()
+{
+    mModuleManager.draw();
+    mWindow.display();
+}
 
-    void GameCore::gameLoop()
-    {
-        mRenderer.configure();
-        mWindow.setActive(true);
-        mPhysicsManager.start();
-        while (mRunning)
-        {
-            onUpdate();
-            onRender();
-        }
-        mPhysicsManager.stop();
-    }
-    void GameCore::onRender()
-    {
+void GameCore::onUpdate()
+{
+    GTime::update(mWindow);
+    mModuleManager.update();
 
-        mRenderer.draw();
-        mWindow.display();
-    }
+}
 
-    void GameCore::onUpdate()
-    {
-        GTime::update(mWindow);
-        mEventManager.update(mWindow);
-        mPhysicsManager.update();
+void GameCore::stopGame()
+{
+    mRunning = false;
+}
 
-    }
-
-    void GameCore::stopGame()
-    {
-        mRunning = false;
-    }
-
+template<class T>
+T &GameCore::getModule()
+{
+    return mModuleManager.get<T>();
+}
 
 }
 //

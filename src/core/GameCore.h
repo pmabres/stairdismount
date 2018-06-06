@@ -1,45 +1,45 @@
 #pragma once
-
 #include <SFML/Window.hpp>
-#include "graphics/DrawEngine.h"
 #include <atomic>
-#include "physics/PhysicsManager.h"
+#include "modules/graphics/DrawModule.h"
+#include "modules/physics/PhysicsModule.h"
+#include "modules/input/EventModule.h"
 #include "time/GTime.h"
-#include "input/EventManager.h"
 #include "input/implementation/GameWindowListener.h"
-#include "Configuration.h"
+#include "modules/ModuleManager.h"
 
 namespace Game
 {
-    class GameCore
+
+class GameWindowListener;
+class GameCore
+{
+public:
+    void init();
+    void stopGame();
+
+    template<class T>
+    T& getModule();
+
+    static GameCore& get()
     {
-    public:
+        static GameCore instance;
+        return instance;
+    }
+    GameCore(GameCore const &) = delete;
+    void operator=(GameCore const &) = delete;
 
-        virtual ~GameCore();
-        void init();
-        void stopGame();
+private:
+    GameCore();
+    sf::Thread mRenderThread;
+    sf::Window mWindow;
+    std::atomic<bool> mRunning;
+    GameWindowListener *mWindowListener;
+    ModuleManager mModuleManager;
+    void gameLoop();
+    void onRender();
+    void onUpdate();
+};
 
-        static GameCore& getInstance()
-        {
-            static GameCore instance; // Guaranteed to be destroyed.
-            // Instantiated on first use.
-            return instance;
-        }
-        GameCore(GameCore const&) = delete;
-        void operator=(GameCore const&) = delete;
-
-    private:
-        GameCore();
-        sf::Thread mRenderThread;
-        sf::Window mWindow;
-        DrawEngine mRenderer;
-        std::atomic<bool> mRunning;
-        PhysicsManager mPhysicsManager;
-        EventManager mEventManager;
-        GameWindowListener* mWindowListener;
-        void gameLoop();
-        void onRender();
-        void onUpdate();
-    };
 }
 

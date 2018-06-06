@@ -3,8 +3,11 @@
 #include "../interfaces/PhysicsEngine.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
+#include <atomic>
 
-class Bullet final : public PhysicsEngine
+namespace Game
+{
+class Bullet final: public PhysicsEngine
 {
 public:
     Bullet();
@@ -16,13 +19,15 @@ public:
     void destroy();
     void test();
 private:
-    btDefaultCollisionConfiguration* mCollisionConfiguration;
-    btCollisionDispatcher* mDispatcher;
-    btBroadphaseInterface* mOverlappingPairCache;
-    btSequentialImpulseConstraintSolver* mSolver;
-    btDiscreteDynamicsWorld* mDynamicsWorld;
-    btAlignedObjectArray<btCollisionShape*> mCollisionShapes;
+    btDefaultCollisionConfiguration *mCollisionConfiguration;
+    btCollisionDispatcher *mDispatcher;
+    btBroadphaseInterface *mOverlappingPairCache;
+    btSequentialImpulseConstraintSolver *mSolver;
+    btDiscreteDynamicsWorld *mDynamicsWorld;
+    btAlignedObjectArray<btCollisionShape *> mCollisionShapes;
     std::atomic_bool mRunning;
     std::atomic_bool mInitialized;
 
 };
+
+}

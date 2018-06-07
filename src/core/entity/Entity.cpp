@@ -68,10 +68,7 @@ void Entity:: cleanup()
     while (!mComponents.empty()) {
         auto it = mComponents.begin();
         if (it->second != NULL) {
-            it->second->stop();
-            it->second->cleanup();
-            it->second->onComponentRemove();
-            delete it->second;
+            removeAndStopComponent(it->second);
         }
         mComponents.erase(it);
     }

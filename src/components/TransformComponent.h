@@ -19,6 +19,7 @@ public:
     void stop() override;
     void configure() override;
     void cleanup() override;
+    void onCreate() override;
 private:
     Transform mTransform;
 

@@ -17,8 +17,8 @@ void CameraController::configure()
     mCamera = &entity->getComponent<Camera>();
     mRotator = new CameraRotator(*mCamera);
     mPositionShifter = new CameraPositionShifter(*mCamera);
-    GameCore::get().getModule<EventModule>().subscribe(*mRotator);
-    GameCore::get().getModule<EventModule>().subscribe(*mPositionShifter);
+    GameCore::get().getModule<EventModule>()->subscribe(*mRotator);
+    GameCore::get().getModule<EventModule>()->subscribe(*mPositionShifter);
 }
 
 void CameraController::draw()
@@ -45,5 +45,9 @@ void CameraController::cleanup()
         delete mRotator;
         delete mPositionShifter;
     }
+}
+void CameraController::onCreate()
+{
+
 }
 }

@@ -10,6 +10,7 @@ public:
     MeshComponent();
     void loadMesh(const char* path);
     MeshTransform& getMeshData();
+    void onCreate() override;
     void update() override;
     void draw() override;
     void start() override;

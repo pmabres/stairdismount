@@ -7,7 +7,8 @@ void PhysicsManager::createEngine(PhysicsEngines engine)
 {
     deleteEngine();
     switch (engine) {
-    case PhysicsEngines::Bullet:mEngine = new Bullet();
+    case PhysicsEngines::Bullet:
+        mEngine = new Bullet();
         break;
     }
 
@@ -59,6 +60,7 @@ void PhysicsManager::update()
 }
 PhysicsObject* PhysicsManager::createObject(Transform transform)
 {
-    return mEngine->createObject(transform);
+    auto physicsObject = mEngine->createObject(transform);
+    return physicsObject;
 }
 }

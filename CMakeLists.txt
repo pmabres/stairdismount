@@ -60,3 +60,27 @@ set(GLEW_USE_STATIC_LIBS TRUE)
 find_package(glew REQUIRED CONFIG)
 include_directories( ${GAME_LIBRARIES_DIR}/glew/include)
 target_link_libraries(${EXECUTABLE_NAME} GLEW::glew_s)
+
+add_custom_command(
+        TARGET ${EXECUTABLE_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        ${CMAKE_SOURCE_DIR}/model/cube.obj
+        ${CMAKE_CURRENT_BINARY_DIR}/cube.obj)
+
+add_custom_command(
+        TARGET ${EXECUTABLE_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        ${CMAKE_SOURCE_DIR}/model/plane.obj
+        ${CMAKE_CURRENT_BINARY_DIR}/plane.obj)
+
+add_custom_command(
+        TARGET ${EXECUTABLE_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        ${CMAKE_SOURCE_DIR}/model/stairs.obj
+        ${CMAKE_CURRENT_BINARY_DIR}/stairs.obj)
+
+add_custom_command(
+        TARGET ${EXECUTABLE_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        ${CMAKE_SOURCE_DIR}/model/suzanne.obj
+        ${CMAKE_CURRENT_BINARY_DIR}/suzanne.obj)

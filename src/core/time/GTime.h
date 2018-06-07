@@ -9,6 +9,7 @@ class GTime final
 public:
     static uint32_t getDelta();
     static uint32_t getTotal();
+    static uint64_t getDeltaMicro();
     static void update(const sf::Window &window);
 
 private:

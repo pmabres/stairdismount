@@ -11,6 +11,8 @@ public:
     BulletTransform(Transform transform);
     Transform fromPhysics();
     void setTransform(Transform transform) override;
+    void setTransform(const btTransform& transform);
+
     btTransform& getNativeTransform();
 private:
     btTransform mTransform;

@@ -22,6 +22,11 @@ uint32_t GTime::getDelta()
     return GTime::mElapsed.asMilliseconds();
 }
 
+uint64_t GTime::getDeltaMicro()
+{
+    return GTime::mElapsed.asMicroseconds();
+}
+
 uint32_t GTime::getTotal()
 {
     return GTime::mTotal.asMilliseconds();

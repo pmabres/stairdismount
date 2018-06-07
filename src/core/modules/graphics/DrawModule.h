@@ -3,7 +3,6 @@
 #include <list>
 #include <GL/glew.h>
 #include <glm/glm.hpp>
-//#include "Camera.h"
 #include "../interfaces/Module.h"
 #include "../../resources/RenderObject.h"
 #include "../../structs/ShaderData.h"
@@ -27,6 +26,7 @@ public:
     glm::uint32 addMesh(MeshTransform &meshTransform);
     void drawMesh(glm::uint32 index, Transform transform);
     void setProjection(CameraData cameraData);
+    CameraData& getProjection();
     //void resize(const sf::Uint32 &width, const sf::Uint32 &height);
 private:
     void clear();

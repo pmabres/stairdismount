@@ -1,4 +1,4 @@
-static const char gFragmentShader[] =
+static const char* gFragmentShader =
 //    "#version 120\n"
 //    "varying vec2 UV;\n"
 //    "uniform sampler2D myTextureSampler;\n"
@@ -21,8 +21,8 @@ static const char gFragmentShader[] =
 "\n"
 "void main(){\n"
 "\n"
-"    vec3 LightColor = vec3(.3f,.3f,.3f);\n"
-"    float LightPower = 50.0f;\n"
+"    vec3 LightColor = vec3(.6f,.3f,.2f);\n"
+"    float LightPower = 5000.0f;\n"
 "    vec3 MaterialDiffuseColor = texture2D( myTextureSampler, UV ).rgb;\n"
 "    vec3 MaterialAmbientColor = vec3(0.1,0.1,0.1) * MaterialDiffuseColor;\n"
 "    vec3 MaterialSpecularColor = vec3(0.3,0.3,0.3);\n"

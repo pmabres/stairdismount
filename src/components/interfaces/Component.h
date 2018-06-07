@@ -8,8 +8,16 @@ class Entity;
 class Component
 {
 public:
-    void onComponentAdd(Entity* entity);
-    void onComponentRemove();
+    void onComponentAdd(Entity *entity)
+    {
+        this->entity = entity;
+        onCreate();
+    };
+    void onComponentRemove()
+    {
+        this->entity = nullptr;
+    }
+    virtual void onCreate() = 0;
     virtual void update() = 0;
     virtual void draw() = 0;
     virtual void start() = 0;
@@ -19,12 +27,4 @@ public:
 protected:
     Entity* entity;
 };
-inline void Component::onComponentAdd(Entity *entity)
-{
-    this->entity = entity;
-}
-inline void Component::onComponentRemove()
-{
-    this->entity = nullptr;
-}
 }

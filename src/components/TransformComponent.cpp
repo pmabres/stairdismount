@@ -33,12 +33,19 @@ void TransformComponent::cleanup()
 {
 
 }
+
 Transform TransformComponent::getTransform()
 {
     return mTransform;
 }
+
 void TransformComponent::setTransform(Transform transform)
 {
     mTransform = transform;
+}
+
+void TransformComponent::onCreate()
+{
+
 }
 }

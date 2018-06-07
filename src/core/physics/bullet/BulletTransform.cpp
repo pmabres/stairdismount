@@ -1,3 +1,4 @@
+#include <iostream>
 #include "BulletTransform.h"
 
 namespace Game
@@ -5,6 +6,7 @@ namespace Game
 Transform BulletTransform::fromPhysics()
 {
     Transform transform;
+
     transform.position.x = mTransform.getOrigin().x();
     transform.position.y = mTransform.getOrigin().y();
     transform.position.z = mTransform.getOrigin().z();
@@ -22,5 +24,9 @@ void BulletTransform::setTransform(Transform transform)
 btTransform& BulletTransform::getNativeTransform()
 {
     return mTransform;
+}
+void BulletTransform::setTransform(const btTransform &transform)
+{
+    mTransform = transform;
 }
 }

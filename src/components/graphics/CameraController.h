@@ -15,6 +15,7 @@ public:
     void stop() override;
     void configure() override;
     void cleanup() override;
+    void onCreate() override;
     //Note: You should call glLoadIdentity before using Render
 private:
     CameraPositionShifter* mPositionShifter;

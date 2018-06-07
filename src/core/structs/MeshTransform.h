@@ -1,10 +1,11 @@
 #pragma once
 #include <glm/glm.hpp>
+#include <vector>
 namespace Game
 {
 struct MeshTransform
 {
-    MeshTransform() : vertices(), uvs(), normals(), indices()
+    MeshTransform()
     {
     }
     MeshTransform(std::vector<glm::vec3> verts,

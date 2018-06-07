@@ -5,6 +5,8 @@
 #include "DrawModule.h"
 #include "../../shaders/ShaderLoader.h"
 #include "../../GameCore.h"
+#include "../../shaders/fragmentShader.h"
+#include "../../shaders/vertexShader.h"
 namespace Game
 {
 void DrawModule::update()
@@ -60,7 +62,7 @@ void DrawModule::clear()
 void DrawModule::shaderSetup()
 {
 
-    mShaderData.programId = LoadShaders();
+    mShaderData.programId = LoadShaders(gFragmentShader, gVertexShader);
     mShaderData.matrixId = static_cast<GLuint>(glGetUniformLocation(mShaderData.programId, "MVP"));
     mShaderData.modelSpaceId =
         static_cast<GLuint>(glGetAttribLocation(mShaderData.programId, "vertexPosition_modelspace"));
@@ -81,7 +83,6 @@ DrawModule::DrawModule() : mRenderObject()
 }
 glm::uint32 DrawModule::addMesh(MeshTransform &meshTransform)
 {
-
 
     // Load it into a VBO
     GLObjectData glObjectData;
@@ -197,5 +198,9 @@ void DrawModule::cleanup()
 void DrawModule::setProjection(CameraData cameraData)
 {
     mCameraData = cameraData;
+}
+CameraData &DrawModule::getProjection()
+{
+    return mCameraData;
 }
 }

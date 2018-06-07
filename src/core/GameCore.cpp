@@ -14,6 +14,9 @@ GameCore::GameCore()
     mModuleManager.add(new EventModule(mWindow));
     mModuleManager.add(new PhysicsModule());
     mModuleManager.add(new EntitiesModule());
+    getModule<EventModule>()->subscribe(*mWindowListener);
+    auto physicsModule = getModule<PhysicsModule>();
+    physicsModule->createEngine(PhysicsEngines::Bullet);
 }
 
 GameCore::~GameCore()
@@ -24,9 +27,6 @@ GameCore::~GameCore()
 void GameCore::init()
 {
     mWindow.setActive(false);
-    getModule<EventModule>().subscribe(*mWindowListener);
-    auto physicsModule = getModule<PhysicsModule>();
-    physicsModule.createEngine(PhysicsEngines::Bullet);
     mRunning = true;
     //Lets make it single threaded for now...
     gameLoop();
@@ -65,7 +65,7 @@ void GameCore::stopGame()
 
 Entity* GameCore::addEntity()
 {
-    return getModule<EntitiesModule>().add();
+    return getModule<EntitiesModule>()->add();
 }
 sf::Window &GameCore::getWindow()
 {

@@ -11,7 +11,7 @@
 
 namespace Game
 {
-glm::uint32 LoadShaders(){
+glm::uint32 LoadShaders(const char* fragmentSrc, const char* vertexSrc){
 
     // Create the shaders
     glm::uint32 VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
@@ -21,7 +21,7 @@ glm::uint32 LoadShaders(){
     GLint Result = GL_FALSE;
     int InfoLogLength;
 
-    char const * VertexSourcePointer = gVertexShader;
+    char const * VertexSourcePointer = vertexSrc;
     glShaderSource(VertexShaderID, 1, &VertexSourcePointer , NULL);
     glCompileShader(VertexShaderID);
 
@@ -34,7 +34,7 @@ glm::uint32 LoadShaders(){
         printf("%s\n", &VertexShaderErrorMessage[0]);
     }
 
-    char const * FragmentSourcePointer = gFragmentShader;
+    char const * FragmentSourcePointer = fragmentSrc;
     glShaderSource(FragmentShaderID, 1, &FragmentSourcePointer , NULL);
     glCompileShader(FragmentShaderID);
 

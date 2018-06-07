@@ -22,7 +22,7 @@ public:
     Entity* addEntity();
 
     template<class T>
-    T& getModule()
+    T* getModule()
     {
         return mModuleManager.get<T>();
     }

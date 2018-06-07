@@ -1,7 +1,9 @@
 #pragma once
 
 #include "../interfaces/PhysicsEngine.h"
+#include "BulletDebugDrawer.h"
 #include "BulletObject.h"
+#include "../../modules/graphics/DrawModule.h"
 #include <btBulletCollisionCommon.h>
 #include <btBulletDynamicsCommon.h>
 #include <atomic>
@@ -28,10 +30,13 @@ private:
     btSequentialImpulseConstraintSolver *mSolver;
     btDiscreteDynamicsWorld *mDynamicsWorld;
     btAlignedObjectArray<btCollisionShape *> mCollisionShapes;
-    btAlignedObjectArray<PhysicsObject *> mPhysicsObjectVector;
+    btAlignedObjectArray<BulletObject *> mPhysicsQueueVector;
     std::atomic_bool mRunning;
     std::atomic_bool mInitialized;
-
+    BulletDebugDrawer mDebugDrawer;
+    DrawModule* mDrawModule;
+    int processObjectCreationQueue();
+    btCollisionShape *generateShape(BulletObject *bulletObject);
 };
 
 }

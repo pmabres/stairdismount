@@ -23,12 +23,12 @@ void MeshComponent::update()
 void MeshComponent::draw()
 {
     Transform transform = entity->getComponent<TransformComponent>().getTransform();
-    GameCore::get().getModule<DrawModule>().drawMesh(mMeshId, transform);
+    GameCore::get().getModule<DrawModule>()->drawMesh(mMeshId, transform);
 }
 
 void MeshComponent::start()
 {
-    mMeshId = GameCore::get().getModule<DrawModule>().addMesh(mRenderObject.getMesh());
+    mMeshId = GameCore::get().getModule<DrawModule>()->addMesh(mRenderObject.getMesh());
 }
 
 void MeshComponent::stop()
@@ -49,6 +49,10 @@ void MeshComponent::cleanup()
 MeshTransform& MeshComponent::getMeshData()
 {
     mRenderObject.getMesh();
+}
+void MeshComponent::onCreate()
+{
+
 }
 }
 

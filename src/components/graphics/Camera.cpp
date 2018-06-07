@@ -48,7 +48,7 @@ void Camera::rotateXY(float x, float y)
 
 void Camera::draw()
 {
-    GameCore::get().getModule<DrawModule>().setProjection(mCameraData);
+    GameCore::get().getModule<DrawModule>()->setProjection(mCameraData);
 }
 
 void Camera::update()
@@ -150,5 +150,9 @@ void Camera::rotateLeft(bool pressed)
 void Camera::rotateUp(bool pressed)
 {
     mRotateUp = pressed;
+}
+void Camera::onCreate()
+{
+
 }
 }

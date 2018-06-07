@@ -1,4 +1,4 @@
-static const char gVertexShader[] =
+static const char* gVertexShader =
 //    "#version 120\n"
 //    "attribute vec3 vertexPosition_modelspace;\n"
 //    "attribute vec2 vertexUV;\n"

@@ -3,6 +3,6 @@
 
 namespace Game
 {
-    glm::uint32_t LoadShaders();
+    glm::uint32 LoadShaders(const char* vertexSrc, const char* fragmentSrc);
 }
 

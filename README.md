@@ -64,3 +64,11 @@ TroubleShooting:
 
 https://www.sfml-dev.org/tutorials/2.5/compile-with-cmake.php
 
+#### Missing Features
+
+A Ragdoll object.
+Physics translation of rotations to draw world.
+A proper working Mesh collider.
+
+Even though it was hard and I couldn't achieve all my objectives, I really enjoyed the time spent on this project as it made me learn many 
+new knowledge in such a short period of time! So it was fun overall!!

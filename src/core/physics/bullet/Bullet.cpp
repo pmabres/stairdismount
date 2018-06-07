@@ -29,8 +29,8 @@ void Bullet::configure()
             new btDiscreteDynamicsWorld(mDispatcher, mOverlappingPairCache, mSolver, mCollisionConfiguration);
         //Earth gravity -9.81f
         mDynamicsWorld->setGravity(btVector3(0, -.4f, 0));
-        mDynamicsWorld->setDebugDrawer(&mDebugDrawer);
-        mDebugDrawer.setupShaders();
+        //mDynamicsWorld->setDebugDrawer(&mDebugDrawer);
+        //mDebugDrawer.setupShaders();
         mInitialized = true;
     }
 }
@@ -46,8 +46,8 @@ void Bullet::update()
     {
         mDynamicsWorld->stepSimulation(GTime::getDeltaMicro() / 1000.0d / 60.0d, 10);
         auto cameraData = mDrawModule->getProjection();
-        mDebugDrawer.SetMatrices(cameraData.viewMatrix, cameraData.projectionMatrix);
-        mDynamicsWorld->debugDrawWorld();
+//        mDebugDrawer.SetMatrices(cameraData.viewMatrix, cameraData.projectionMatrix);
+//        mDynamicsWorld->debugDrawWorld();
         for (int j = mDynamicsWorld->getNumCollisionObjects() - 1; j >= 0; j--)
         {
             btCollisionObject *obj = mDynamicsWorld->getCollisionObjectArray()[j];
